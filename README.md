@@ -1,1 +1,1 @@
-# MyWeather
+# Aplicatia MyWeather
