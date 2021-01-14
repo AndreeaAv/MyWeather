@@ -1,4 +1,4 @@
-package ro.mta.se.lab;
+package ro.mta.se.lab.model;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
