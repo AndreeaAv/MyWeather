@@ -77,6 +77,7 @@ public class VremeController {
                 String info = getInfo(newValue);
                 Vreme thisVreme = new Vreme(info);
                 showWeather(thisVreme);
+                writeLog(thisVreme);
             }
         });
 
@@ -140,5 +141,16 @@ public class VremeController {
             weatherImage.setImage(new Image(getClass().getResourceAsStream("/images/snow.jpg")));
     }
 
+    private void writeLog(Vreme thisVreme){
+        try (
+            FileWriter outFile = new FileWriter("log.txt", true);
+            BufferedWriter bw = new BufferedWriter(outFile);
+            PrintWriter out = new PrintWriter(bw)){
+                SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+                Date date = new Date(System.currentTimeMillis());
+                out.println(date + "\t" + thisVreme.getCountry() + "\t" + thisVreme.getCity() + "\t" + thisVreme.getTemp() + "\t" + thisVreme.getFeelsLike() + "\t" + thisVreme.getDescription() + "\t" + thisVreme.getHumidity() + "\t" + thisVreme.getWind());
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
