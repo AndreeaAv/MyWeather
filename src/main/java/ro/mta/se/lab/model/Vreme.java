@@ -21,23 +21,10 @@ public class Vreme {
 
     public Vreme(String jsonString){
         JsonObject object = Json.parse(jsonString).asObject();
-
-        JsonArray weather = object.get("weather").asArray();
-        for (JsonValue item : weather){
-            this.description = new SimpleStringProperty(item.asObject().getString("description","Not found"));
-        }
-
-        this.temp = new SimpleFloatProperty(object.get("main").asObject().getFloat("temp",-100));
-        this.feelsLike = new SimpleFloatProperty(object.get("main").asObject().getFloat("feels_like",-100));
-        this.humidity = new SimpleIntegerProperty(object.get("main").asObject().getInt("humidity",-100));
-
-        this.wind = new SimpleFloatProperty(object.get("wind").asObject().getFloat("speed",-100));
-
-        this.country = new SimpleStringProperty(object.get("sys").asObject().getString("country","Not Found"));
-        this.city = new SimpleStringProperty(object.getString("name","Not Found"));
-
-        //System.out.println(this.city.toString() + this.country.toString() + this.temp.toString() + this.feelsLike.toString()+this.humidity.toString()+this.wind.toString());
+        parse(object);
     }
+
+
 
     public Vreme(String country,String city, float wind, String description, String icon, float temp, float feelsLike, int humidity){
         this.country = new SimpleStringProperty(country);
@@ -146,5 +133,28 @@ public class Vreme {
         this.humidity.set(humidity);
     }
 
+    public Vreme parse(JsonObject object){
+        JsonArray weather = object.get("weather").asArray();
+        for (JsonValue item : weather){
+            this.description = new SimpleStringProperty(item.asObject().getString("description","Not found"));
+        }
+        this.temp = new SimpleFloatProperty(object.get("main").asObject().getFloat("temp",-100));
+        this.feelsLike = new SimpleFloatProperty(object.get("main").asObject().getFloat("feels_like",-100));
+        this.humidity = new SimpleIntegerProperty(object.get("main").asObject().getInt("humidity",-100));
+        this.wind = new SimpleFloatProperty(object.get("wind").asObject().getFloat("speed",-100));
+        this.country = new SimpleStringProperty(object.get("sys").asObject().getString("country","Not Found"));
+        this.city = new SimpleStringProperty(object.getString("name","Not Found"));
 
+        return this;
+    }
+
+    static public boolean equals(Vreme vreme1, Vreme vreme2){
+        if (vreme1.getDescription().equals(vreme2.getDescription()) && vreme1.getTemp()==vreme2.getTemp() && vreme1.getFeelsLike()==vreme2.getFeelsLike()
+            && vreme1.getHumidity()==vreme2.getHumidity() && vreme1.getWind()==vreme2.getWind() && vreme1.getCountry().equals(vreme2.getCountry())
+            && vreme1.getCity().equals(vreme2.getCity())){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
