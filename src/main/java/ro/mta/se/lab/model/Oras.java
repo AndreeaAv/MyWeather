@@ -14,8 +14,4 @@ public class Oras {
         this.lon=lon;
         this.countryCode=countryCode;
     }
-
-    public void getData(){
-        //todo: interogare API pt orasul respectiv
-    }
 }
