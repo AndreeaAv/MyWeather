@@ -9,6 +9,10 @@ import javafx.scene.control.ChoiceBox;
 import ro.mta.se.lab.model.Oras;
 import ro.mta.se.lab.model.Vreme;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 public class VremeController {
@@ -46,9 +50,9 @@ public class VremeController {
         cityMenu.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                //getInfo(newValue);
-                //parse(String Json);
-                //showWeather(newValue);
+                String info = getInfo(newValue);
+                Vreme thisVreme = new Vreme(info);
+                //showWeather(thisVreme);
             }
         });
 
@@ -64,7 +68,38 @@ public class VremeController {
         cityMenu.setItems(cities);
     }
 
-    private void showWeather(String city){
+    String getInfo(String city){
+        String apiAdress = "http://api.openweathermap.org/data/2.5/weather";
+        String apiKey = "appid=863662843e9644cbb800ddf54f90ae4e";
+
+        StringBuilder content = new StringBuilder();
+        String requestString = apiAdress + "?q=" + city + "&" + apiKey;
+
+        try{
+            URL url = new URL(requestString);
+
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+
+            int status = con.getResponseCode();
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null){
+                content.append(inputLine);
+            }
+
+            in.close();
+            con.disconnect();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return content.toString();
+    }
+
+    private void showWeather(Vreme thisVreme){
 
     }
 }
