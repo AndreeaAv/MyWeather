@@ -6,9 +6,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import ro.mta.se.lab.model.Oras;
 import ro.mta.se.lab.model.Vreme;
 
+import javax.swing.text.html.ImageView;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -20,13 +22,32 @@ public class VremeController {
     private ObservableList<String> countries = FXCollections.observableArrayList();
     private ObservableList<String> cities = FXCollections.observableArrayList();
 
-
-
     @FXML
     private ChoiceBox<String> countryMenu;
 
     @FXML
     private ChoiceBox<String> cityMenu;
+
+    @FXML
+    private Label cityNameLabel;
+
+    @FXML
+    private Label countryNameLabel;
+
+    @FXML
+    private Label windLabel;
+
+    @FXML
+    private Label descriptionLabel;
+
+    @FXML
+    private Label tempLabel;
+
+    @FXML
+    private Label feelsLikeLabel;
+
+    //@FXML
+    //private ImageView weatherImage;
 
 
     public VremeController(ObservableList<Oras> cityData){
@@ -52,7 +73,7 @@ public class VremeController {
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
                 String info = getInfo(newValue);
                 Vreme thisVreme = new Vreme(info);
-                //showWeather(thisVreme);
+                showWeather(thisVreme);
             }
         });
 
@@ -95,11 +116,16 @@ public class VremeController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return content.toString();
     }
 
     private void showWeather(Vreme thisVreme){
-
+        cityNameLabel.setText(thisVreme.getCity());
+        countryNameLabel.setText(thisVreme.getCountry());
+        windLabel.setText(String.valueOf(thisVreme.getWind()));
+        descriptionLabel.setText(thisVreme.getDescription());
+        tempLabel.setText(String.valueOf(thisVreme.getTemp()));
+        feelsLikeLabel.setText(String.valueOf(thisVreme.getFeelsLike()));
+        //todo set the image too
     }
 }
