@@ -1,29 +1,52 @@
 package ro.mta.se.lab.model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
+import javafx.beans.property.*;
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
+import org.json.simple.JSONObject;
 import javax.xml.crypto.dsig.SignatureMethod;
 
 public class Vreme {
     StringProperty country;
     StringProperty city;
-    StringProperty wind;
     StringProperty description;
+    StringProperty icon;
 
-    IntegerProperty temp;
-    IntegerProperty feelsLike;
+    FloatProperty wind;
+    FloatProperty temp;
+    FloatProperty feelsLike;
     IntegerProperty humidity;
 
-    public Vreme(String country,String city, String wind, String description, int temp, int feelsLike, int humidity){
+    public Vreme(String jsonString){
+        JsonObject object = Json.parse(jsonString).asObject();
+
+        JsonArray weather = object.get("weather").asArray();
+        for (JsonValue item : weather){
+            this.description = new SimpleStringProperty(item.asObject().getString("description","Not found"));
+        }
+
+        this.temp = new SimpleFloatProperty(object.get("main").asObject().getFloat("temp",-100));
+        this.feelsLike = new SimpleFloatProperty(object.get("main").asObject().getFloat("feels_like",-100));
+        this.humidity = new SimpleIntegerProperty(object.get("main").asObject().getInt("humidity",-100));
+
+        this.wind = new SimpleFloatProperty(object.get("wind").asObject().getFloat("speed",-100));
+
+        this.country = new SimpleStringProperty(object.get("sys").asObject().getString("country","Not Found"));
+        this.city = new SimpleStringProperty(object.getString("name","Not Found"));
+
+        //System.out.println(this.city.toString() + this.country.toString() + this.temp.toString() + this.feelsLike.toString()+this.humidity.toString()+this.wind.toString());
+    }
+
+    public Vreme(String country,String city, float wind, String description, String icon, float temp, float feelsLike, int humidity){
         this.country = new SimpleStringProperty(country);
         this.city = new SimpleStringProperty(city);
-        this.wind = new SimpleStringProperty(wind);
+        this.wind = new SimpleFloatProperty(wind);
         this.description = new SimpleStringProperty(description);
-        this.temp = new SimpleIntegerProperty(temp);
-        this.feelsLike = new SimpleIntegerProperty(feelsLike);
+        this.icon = new SimpleStringProperty(icon);
+        this.temp = new SimpleFloatProperty(temp);
+        this.feelsLike = new SimpleFloatProperty(feelsLike);
         this.humidity = new SimpleIntegerProperty(humidity);
     }
 
@@ -43,7 +66,7 @@ public class Vreme {
         return city.get();
     }
 
-    public StringProperty cityyProperty(){
+    public StringProperty cityProperty(){
         return city;
     }
 
@@ -51,15 +74,27 @@ public class Vreme {
         this.city.set(city);
     }
 
-    public String getWind(){
+    public String getIcon(){
+        return icon.get();
+    }
+
+    public StringProperty iconProperty(){
+        return icon;
+    }
+
+    public void setIcon(String icon){
+        this.icon.set(icon);
+    }
+
+    public float getWind(){
         return wind.get();
     }
 
-    public StringProperty windProperty(){
+    public FloatProperty windProperty(){
         return wind;
     }
 
-    public void setWind(String wind){
+    public void setWind(float wind){
         this.wind.set(wind);
     }
 
@@ -75,11 +110,11 @@ public class Vreme {
         this.description.set(description);
     }
 
-    public int getTemp(){
+    public float getTemp(){
         return temp.get();
     }
 
-    public IntegerProperty tempProperty(){
+    public FloatProperty tempProperty(){
         return temp;
     }
 
@@ -87,11 +122,11 @@ public class Vreme {
         this.temp.set(temp);
     }
 
-    public int getFeelsLike(){
+    public float getFeelsLike(){
         return feelsLike.get();
     }
 
-    public IntegerProperty feelsLikeProperty(){
+    public FloatProperty feelsLikeProperty(){
         return feelsLike;
     }
 
@@ -110,5 +145,6 @@ public class Vreme {
     public void setHumidity(int humidity){
         this.humidity.set(humidity);
     }
+
 
 }
