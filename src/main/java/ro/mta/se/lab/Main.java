@@ -42,8 +42,6 @@ public class Main extends Application{
         catch (FileNotFoundException e){
             System.out.println(e.getMessage());
         }
-
-
     }
 
     public void start(Stage primaryStage){

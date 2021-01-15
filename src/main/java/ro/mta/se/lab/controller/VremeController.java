@@ -7,14 +7,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import ro.mta.se.lab.model.Oras;
 import ro.mta.se.lab.model.Vreme;
 
-import javax.swing.text.html.ImageView;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class VremeController {
@@ -46,8 +49,8 @@ public class VremeController {
     @FXML
     private Label feelsLikeLabel;
 
-    //@FXML
-    //private ImageView weatherImage;
+    @FXML
+    private ImageView weatherImage;
 
 
     public VremeController(ObservableList<Oras> cityData){
@@ -126,6 +129,16 @@ public class VremeController {
         descriptionLabel.setText(thisVreme.getDescription());
         tempLabel.setText(String.valueOf(thisVreme.getTemp()));
         feelsLikeLabel.setText(String.valueOf(thisVreme.getFeelsLike()));
-        //todo set the image too
+
+        if (thisVreme.getDescription().contains("sky") || thisVreme.getDescription().contains("sun"))
+            weatherImage.setImage(new Image(getClass().getResourceAsStream("/images/sun.jpg")));
+        if (thisVreme.getDescription().contains("clouds"))
+            weatherImage.setImage(new Image(getClass().getResourceAsStream("/images/clouds.jpg")));
+        if (thisVreme.getDescription().contains("rain"))
+            weatherImage.setImage(new Image(getClass().getResourceAsStream("/images/rain.jpg")));
+        if (thisVreme.getDescription().contains("snow"))
+            weatherImage.setImage(new Image(getClass().getResourceAsStream("/images/snow.jpg")));
+    }
+
     }
 }
