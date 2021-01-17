@@ -144,7 +144,7 @@ public class Vreme {
         this.wind = new SimpleFloatProperty(object.get("wind").asObject().getFloat("speed",-100));
         this.country = new SimpleStringProperty(object.get("sys").asObject().getString("country","Not Found"));
         this.city = new SimpleStringProperty(object.getString("name","Not Found"));
-
+        
         return this;
     }
 

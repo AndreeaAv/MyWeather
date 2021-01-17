@@ -2,3 +2,4 @@ Fri Jan 15 21:41:48 EET 2021	RO	Moineşti	267.61	262.16	light snow	80	3.6
 Fri Jan 15 21:41:52 EET 2021	RO	Bucharest	271.03	266.35	clear sky	86	3.09
 Fri Jan 15 21:41:56 EET 2021	GB	Silverstone	271.11	266.43	overcast clouds	93	3.28
 Fri Jan 15 22:51:04 EET 2021	FR	Ploufragan	276.54	272.98	clear sky	87	2.57
+Sun Jan 17 20:06:31 EET 2021	RO	Bucharest	267.91	263.48	clear sky	74	2.06

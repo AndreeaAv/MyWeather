@@ -31,13 +31,13 @@
                         </Label>
                         <Pane layoutX="50.0" layoutY="101.0" prefHeight="228.0" prefWidth="317.0">
                            <children>
-                              <Label fx:id="cityNameLabel" layoutX="50.0" layoutY="101.0" prefHeight="26.0" prefWidth="150.0" text="Label" />
-                              <Label fx:id="windLabel" layoutX="50.0" layoutY="153.0" prefHeight="26.0" prefWidth="98.0" text="Label" />
-                              <Label fx:id="descriptionLabel" layoutX="14.0" layoutY="127.0" prefHeight="26.0" prefWidth="150.0" text="Label" />
+                              <Label fx:id="cityNameLabel" layoutX="50.0" layoutY="101.0" prefHeight="26.0" prefWidth="150.0" />
+                              <Label fx:id="windLabel" layoutX="50.0" layoutY="153.0" prefHeight="26.0" prefWidth="98.0" />
+                              <Label fx:id="descriptionLabel" layoutX="14.0" layoutY="127.0" prefHeight="26.0" prefWidth="150.0" />
                               <ImageView fx:id="weatherImage" fitHeight="80.0" fitWidth="98.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                               <Label fx:id="tempLabel" layoutX="206.0" layoutY="28.0" prefHeight="26.0" prefWidth="98.0" />
                               <Label fx:id="feelsLikeLabel" layoutX="206.0" layoutY="54.0" prefHeight="26.0" prefWidth="98.0" />
-                              <Label fx:id="countryNameLabel" layoutX="14.0" layoutY="101.0" prefHeight="26.0" prefWidth="32.0" text="Label" />
+                              <Label fx:id="countryNameLabel" layoutX="14.0" layoutY="101.0" prefHeight="26.0" prefWidth="32.0" />
                               <Label fx:id="tempLabel1" layoutX="126.0" layoutY="28.0" prefHeight="26.0" prefWidth="76.0" text="Temperature:" />
                               <Label fx:id="feelsLikeLabel1" layoutX="126.0" layoutY="54.0" prefHeight="26.0" prefWidth="98.0" text="Feels like:" />
                               <Label fx:id="countryNameLabel1" layoutX="14.0" layoutY="153.0" prefHeight="26.0" prefWidth="32.0" text="Wind:" />
